@@ -1,0 +1,49 @@
+Week 4: Functions and Program Structure 
+
+นิยามของ Function รูปแบบของ Function
+return-value-type function-name (parameter-list)
+    {
+       declarations
+   
+       statement
+       statement
+       :
+    }
+
+Function Prototypes
+รูปแบบของฟังก์ชัน Prototype
+    return-value-type function-name (parameter-list);
+- มีลักษณะเหมือน Function header
+- สามารถละชื่อตัวแปรได้ แต่ไม่สามารถละประเภทของข้อมูลได้
+
+Return Values 
+ฟังก์ชันจะต้องส่งค่ากลับหรือไม่ขึ้นอยู่กับรูปแบบของ void
+ตัวอย่าง
+ int isOdd(int val)
+    {
+       return val % 2;
+    }
+ 
+    int isEven(int val)
+    {
+       return !isOdd(val);
+    }
+
+    main ()
+    {  int value;
+
+       printf("Enter an Integer Value: ");
+       scanf("%d", &value);
+
+       if (isEven(value))
+          printf("%d is an even number\n", value);
+       else
+          printf("%d is not an even number\n", value);
+    }
+เมื่อโปรแกรมถูกทำงานไปจนเจอคำสั่ง return การทำงานโปรแกรมจะกลับไปทำงานต่อจากจุดที่ฟังก์ชันถูกเรียกใช้
+
+Recursion (การเรียกซ้ำ)
+สามารถเรียกใช้ตัวมันเองได้
+ตอนเรียกใช้ตัวเองโปรแกรมจะทำสำเนาตัวแปรภายในฟังก์ชัน
+- Local Variable ทำงานถายในฟังก์ชัน
+  Global Variable ทำงานภายใน int main
