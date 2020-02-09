@@ -1,0 +1,54 @@
+Week 3: Control Flow
+
+1.Statements and Blocks
+
+- ตัวดำเนินการกฃายเป็น statement ก็ต่อเมื่่อถูกต่อท้ายด้วยเครื่องหมาย semi colon (;)
+- เวลากำหนดค่าหรือกำหนดตัวแปรต่างๆในภาษา c ต้องต่อท้ายด้วย (;) เสมอ****
+- เครื่องหมายปีกกาใช้กำหนด statement ในแต่ละ Block
+
+2.If - Else
+
+- เขียนโดยใช้รูปแบบ if (expression)
+เช่น 
+- if (expression)
+        statement1
+    else 
+        statement2
+
+- if (n > 0)
+    if (a > b)
+       z = a;
+    else
+       z = b;
+else นี้จะคู่กับ if ที่อยู่ใกล้สุด
+- Else - If 
+เขียนได้โดย
+if (expression1)
+      statement1
+   else if (expression2)
+      statement2
+   else if (expression3)
+      statement3
+   else if (expression4)
+      statement4
+   else
+      statement5
+- เมื่อเจอตัวที่เป็นจริง statement ที่เกี่ยวข้องจะถูกทำงาน
+
+3.Loops - While และ For
+- ถ้า expression ของ while เป็นจริง state จะถูกทำงานจนกว่า expression จะเป็นเท็จ
+รูปแบบของ while ถูกเขียนได้ดังนี้
+while (expression) 
+      statement
+
+รูปแบบของ for เขียนได้ดังนี้
+for (expr1; expr2; expr3)
+       statement
+       มีลักษณะคล้าย
+while (expr2) {
+       statement
+       expr3;
+    }
+
+expr1 และ expr3 เป็นการกำหนดค่าเรียกใช้ฟังก์ชันส่วน expr2 จะเป็นการเทียบค่า
+- (expr1,expr2,expr3) สามารถเว้นไว้ได้แต่จำเป็นต้องใส่เครื่องหมาย (;) ไว้
