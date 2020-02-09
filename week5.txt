@@ -1,0 +1,53 @@
+Week 5: Functions and Program Structure (continue from last week)
+
+1.Function Call และ Stack Frames
+1.1) ฟังก์ชันนั้นจะมีขั้นตอนการจัดเก็บตัวแปรและพารามิเตออร์ที่รับข้อมูลเข้ามาและตัวแปร local ในบางกรณีอาจมีตัวแปรที่ถูกใช้งานโดยชั่วคราว
+บริเวณนี้เรียกว่า stack frame ถูกจัดเก็บอยู่ใน stack ของ process
+- frame pointer การจัดเก็บค่าของ frame pointer นั้นเป็น base address ของ function frame
+ภายในฟังก์ชันโึ้ดที่เข้าถึงตัวแปรจะถูกกำหนดอยู่ในรูปแบบของ offset จาก frame pointer
+- stack pointer การจัดเก็บค่าของ stack pointer จะมีการเปลี่ยนแปลงค่าในช่วงที่ฟังก์ชันทำงานซึ่งจะมีการ push และ pop ค่าใน stack
+- ใน Frame pointer จะไม่มีการเปลี่ยนแปลงค่าในการทำงานของฟังก์ชัน
+1.2) สิ่งที่เกิดขึ้นในช่วงการทำงานของฟังก์ชัน
+  - ค่าใน frame pointer (ebp/rbp) ถูก push ลงใน stack
+  - move ค่าที่อยู่ใน stack pointer ไปใส่ใน frame pointer เพื่อเป็นการกำหนดจุดเริ่มต้นของ frame (start of the frame)
+  - ลบค่า (subtract) ออกจาก stack pointer ตามขนาดที่ฟังก์ชันต้องการใช้ในการเก็บข้อมูล
+  - คำสั่ง call จะ push ตำแหน่งของ return address ลงใน stack ก่อนที่จะเรียกใช้ฟังก์ชัน
+  - โค้ดของฟังก์ชันเริ่มทำงาน โดยที่การอ้างอิงไปยังค่าตัวแปร local
+  - เมื่อฟังก์ชันสิ้นสุดการทำงาน จะมีการ copy ค่าของ frame pointer ไปลงใน stack pointer
+  - กลับจากการเรียกใช้ฟังก์ชันด้วยการใช้คำสั่ง “ret”  ซึ่งจะทำการ pop ค่า return address ออกจาก stack แล้วจึงย้ายการทำงานกลับไปยังจุดเรียกใช้ฟังก์ชัน
+ตัวอย่าง
+int bar(int a, int b)
+     {  int x, y;
+
+        x = 444;
+        y = a + b;
+        return y;
+     }
+
+     void foo()
+     {  int result;
+
+        result = 1;
+        result = bar(111, 222);
+1.3) ส่วนประกอบหลักของ Stack Frames 
+- เมื่อฟังก์ชันถูกเรียก stack frame จะถูกสร้างขึ้น
+- return address
+- เมื่อฟังก์ชันทำงานเสร็จ stack frame จะถูกทำลาย
+
+2.การสร้าง Static Library
+ gcc -c func.c 
+
+ ar cr libfunc.a func.o
+ 
+3.การสร้าง Shared (Dynamic) Library
+- Windows
+      gcc -shared -o libfunc.dll -Wl,--out-implib,libfunc.dll.a *.o
+- MacOSX
+               gcc -shared -o libfunc.dylib *.o
+- Linux
+               gcc -shared -o libfunc.so *.o
+
+4.การเรียกใช้ฟังก์ชันใน Shared Library ของภาษา C จาก Python
+from ctypes import cdll
+     c_lib = cdll.LoadLibrary("libfunc.dll")
+     c_lib.c_function(123)
