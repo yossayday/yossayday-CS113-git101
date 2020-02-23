@@ -1,0 +1,65 @@
+Week 9: Struct
+
+- ในภาษา C นั้นจะมีการประกาศโครงสร้างข้อมูลที่มีรูปแบบดังนี้
+
+struct struct_name
+{
+    member_type1 member_name1;
+    member_type2 member_name2;
+    member_type3 member_name3;
+    .
+    .
+} object_names;
+
+เราใช้คำสั่ง struct ในการประกาศโครงสร้างข้อมูลโดยมีรูปแบบการตั้งชื่อเหมือนตัวแปร
+คือเป็นตัวอักษร ตัวเลข และเครื่องหมาย underscore และจะต้องไม่ขึ้นต้นด้วยตัวเลข
+struct นั้นมีการใช้งานคล้ายๆกับ array เพียงแต่ใน array นั้นจำเป็นต้องมีตัวแปรที่ชนิดเดียวกันแต่ใน struct นั้นจะมีการประกาศโครงสร้างข้อมูลที่มีรูปแบบดังนั้น
+เราอาจจะใช้ตัวแปรที่ต่างกันได้ในการเก็บค่าเข้าไปในห้องๆหนึ่ง
+
+- การใช้งาน struct
+โครงสร้างข้อมูลใน ภาษา C (struct) นั้นเป็นข้อมูลประเภทหนึ่งดังนั้นมันจึงสามารถทำงานร่วมกับอาเรย์
+ในตัวอย่างนี้เป็นการใช้อาเรย์เพื่อเก็บโครงสร้างข้อมูลหลายๆตัวไว้ในอาเรย์
+
+#include <stdio.h>
+
+struct point
+{
+    int x;
+    int y;
+};
+
+int main()
+{
+    const int TOTAL_POINT = 4;
+
+    struct point p[TOTAL_POINT];
+    p[0].x = 1;
+    p[0].y = 2;
+    p[1].x = -3;
+    p[1].y = -5;
+    p[2].x = 4;
+    p[2].y = 8;
+    p[3].x = 0;
+    p[3].y = -1;
+
+    printf("There are %d steps for robot to walk.\n", TOTAL_POINT);
+
+    int i = 0;
+    for (i = 0; i < TOTAL_POINT; i++)
+    {
+        printf("Step %d: walk to point %d, %d\n", i, p[i].x, p[i].y);
+    }
+
+    return 0;
+}
+
+เป็นตัวอย่างควบคุมการเดินของหุ่นยนต์ โดยเราสร้าง struct สำหรับเก็บตำแหน่งของหุ่นยนต์ คือ x และ y
+หลังจากนั้นเราสร้างอาเรย์ในการลำดับการเดินของหุ่นยนต์
+
+There are 4 steps for robot to walk.
+Step 0: walk to point 1, 2
+Step 1: walk to point -3, -5
+Step 2: walk to point 4, 8
+Step 3: walk to point 0, -1
+
+ส่วนนี่เป็นผลลัพธ์การทำงานของโปรแกรม หุ่นยนต์จะเดินไปยังทิศต่างๆที่เรากำหนดไว้ในอาเรย์ของ struct
